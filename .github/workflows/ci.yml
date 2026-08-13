@@ -23,7 +23,9 @@ jobs:
           submodules: recursive
 
       - name: Pin skore submodule to v2
-        run: git -C thirdparty/skore checkout v2
+        run: |
+          git -C thirdparty/skore fetch --depth=1 origin v2
+          git -C thirdparty/skore checkout --force FETCH_HEAD
 
       - name: Install dependencies
         run: |
