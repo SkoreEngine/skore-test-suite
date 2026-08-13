@@ -1,0 +1,4 @@
+[submodule "thirdparty/skore"]
+	path = thirdparty/skore
+	url = https://github.com/SkoreEngine/skore.git
+	branch = v2

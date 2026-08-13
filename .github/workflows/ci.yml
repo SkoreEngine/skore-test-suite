@@ -1,0 +1,66 @@
+# Build the engine (submodule or sibling) and run integration tests.
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  integration:
+    name: Integration (Linux + lavapipe)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+
+      - name: Pin skore submodule to v2
+        run: git -C thirdparty/skore checkout v2
+
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y \
+            ninja-build \
+            python3 \
+            libx11-dev libxcursor-dev libxi-dev libxinerama-dev \
+            libxrandr-dev libxkbcommon-dev libgl-dev \
+            mesa-vulkan-drivers vulkan-tools
+
+      - name: Configure
+        run: >
+          cmake -S . -B build -G Ninja
+          -DCMAKE_BUILD_TYPE=Debug
+          -DBUILD_TESTING=ON
+          -DSK_ENABLE_CLANG_TIDY=OFF
+          -DSKORE_DIR=${{ github.workspace }}/thirdparty/skore
+
+      - name: Build
+        run: cmake --build build --parallel
+
+      - name: Unit host
+        run: ctest --test-dir build -L unit --output-on-failure --verbose
+
+      - name: Integration tests
+        env:
+          SK_RUN_INTEGRATION: "1"
+          VK_ICD_FILENAMES: /usr/share/vulkan/icd.d/lvp_icd.json
+          SK_TEST_ARTIFACT_DIR: ${{ github.workspace }}/build/test-artifacts
+        run: ctest --test-dir build -L integration --output-on-failure --verbose
+
+      - name: Upload test artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: integration-test-artifacts
+          path: build/test-artifacts/
+          if-no-files-found: ignore
+          retention-days: 14
