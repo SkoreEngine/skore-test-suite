@@ -103,6 +103,10 @@ if(NOT TARGET sk-compression-conformance)
     sk_ctest_mark_unit(sk-compression-conformance)
 endif()
 
+# APX-336: headless widget automation (unit; no GPU). Always added so CI
+# runs check #2 even when an older engine still builds integration tests.
+add_subdirectory(widget_auto)
+
 # Older skore checkouts still add_subdirectory(tests/integration). Skip our
 # copies so target names do not clash until that tree is updated.
 if(EXISTS "${SKORE_SOURCE_DIR}/tests/integration/CMakeLists.txt")
