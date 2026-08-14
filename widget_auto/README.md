@@ -88,10 +88,14 @@ Return codes match the engine: `SK_UI_TEST_OK`, `SK_UI_TEST_ERR_NOT_FOUND`,
 ## Run
 
 ```bash
-cmake --build build --target sk-widget-auto-tests
+# Point SKORE_DIR at feature/review-necessary-widgets-for-skore-edito first.
+cmake --build build --target sk-widget-auto-tests sk-tests
 ./build/bin/sk-widget-auto-tests
+# 19 per-family SK_UI_TEST scenarios (plugin host; no GPU):
+(cd build/bin && ./sk-tests --filter='ui_author_button_family_*,ui_author_checkbox_radio_*,ui_author_text_family_*')
 # or
-ctest --test-dir build -R sk-widget-auto-tests --output-on-failure
+ctest --test-dir build -R 'sk-widget-auto-tests|sk-widget-family-automation' --output-on-failure
+./scripts/run-widget-automation.sh
 ```
 
 Filter: `./build/bin/sk-widget-auto-tests --filter=widget_auto_example_*`
