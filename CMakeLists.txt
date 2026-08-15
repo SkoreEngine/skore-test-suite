@@ -2,10 +2,12 @@ cmake_minimum_required(VERSION 3.22)
 project(skore-test-suite C CXX)
 
 # ---------------------------------------------------------------------------
-# Locate the skore engine (v2).
+# Locate the skore engine.
 #   1. -DSKORE_DIR=<path>
 #   2. Sibling checkout ../skore (local engine worktree)
-#   3. thirdparty/skore (git submodule, branch v2)
+#   3. thirdparty/skore (git submodule)
+# Widget family automation (check #2) exists on
+# feature/review-necessary-widgets-for-skore-edito, not v2/main.
 # ---------------------------------------------------------------------------
 set(_skore_sibling "${CMAKE_CURRENT_SOURCE_DIR}/../skore")
 set(_skore_submodule "${CMAKE_CURRENT_SOURCE_DIR}/thirdparty/skore")
@@ -20,7 +22,7 @@ if(NOT SKORE_DIR OR NOT EXISTS "${SKORE_DIR}/CMakeLists.txt")
     message(FATAL_ERROR
         "skore engine not found. Init the submodule or pass -DSKORE_DIR=...\n"
         "  git submodule update --init --recursive\n"
-        "  git -C thirdparty/skore checkout v2")
+        "  git -C thirdparty/skore checkout feature/review-necessary-widgets-for-skore-edito")
 endif()
 get_filename_component(SKORE_DIR "${SKORE_DIR}" ABSOLUTE)
 set(SKORE_DIR "${SKORE_DIR}" CACHE PATH "Path to the skore engine source tree")
@@ -102,6 +104,10 @@ if(NOT TARGET sk-compression-conformance)
         WORKING_DIRECTORY "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}")
     sk_ctest_mark_unit(sk-compression-conformance)
 endif()
+
+# APX-336: headless widget automation (unit; no GPU). Always added so CI
+# runs check #2 even when an older engine still builds integration tests.
+add_subdirectory(widget_auto)
 
 # Older skore checkouts still add_subdirectory(tests/integration). Skip our
 # copies so target names do not clash until that tree is updated.
