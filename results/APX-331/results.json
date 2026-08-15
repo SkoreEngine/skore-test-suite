@@ -1,0 +1,23 @@
+{
+  "task": "APX-331",
+  "title": "Verify recorded suite results and confirm triage closure",
+  "verdict": "suite green, pin correct",
+  "follow_up_tasks_opened": [],
+  "suite": {
+    "source_commit": "945dd9bb850c0bb392d9e9a1ae1ddc0ac8b72378",
+    "source_task": "APX-326",
+    "ctest": {"ran": 8, "passed": 8, "failed": 0, "skipped": 0},
+    "sk_tests": {"ran": 852, "passed": 852, "failed": 0, "ignored": 0},
+    "sk_integration_tests": {"ran": 60, "passed": 60, "failed": 0, "ignored": 0},
+    "failing_test_names": [],
+    "complete": true
+  },
+  "pin": {
+    "source_commit": "624d1ef6c5d391f1c9abca76ca7580148e1c2617",
+    "source_task": "APX-325",
+    "gitlink_sha": "5c7a3da1b84ffb5fd862f108e21353078c227e7a",
+    "origin_v2_sha": "5c7a3da1b84ffb5fd862f108e21353078c227e7a",
+    "match": true,
+    "v2_advanced_since": false
+  }
+}

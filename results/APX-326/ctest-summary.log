@@ -1,0 +1,152 @@
+    Start 1: sk-compression-conformance
+1: Test command: /home/apex/.apex-runner/workdirs/027924ca-d8ea-4621-a7fc-933ded826a9f/tasks/12cf6799-2588-4618-9e2c-6555784b2422/skore-test-suite/build/bin/sk-compression-conformance
+1: Working Directory: /home/apex/.apex-runner/workdirs/027924ca-d8ea-4621-a7fc-933ded826a9f/tasks/12cf6799-2588-4618-9e2c-6555784b2422/skore-test-suite/build/bin
+1: Test timeout computed to be: 1500
+1: 
+1: Intentional gaps in the APX-165 migration table (no planned v2 equivalent):
+1:   - Reflection value registration of CompressionMode (RegisterIOTypes.cpp:251-253)
+1:     reason: No planned equivalent: v2 has no reflection/metadata layer; re-add with the reflection layer.
+1:   - Texture resource field registration of CompressionMode (RegisterGraphicsTypes.cpp:1104)
+1:     reason: No planned equivalent: v2 resource layer stores the raw id (u32); no metadata field yet.
+1:   - Commented-out LZ4 branches in Compression.cpp
+1:     reason: No planned equivalent: never shipped on main, no LZ4 dependency.
+1: 
+1: compression mapping conformance check PASSED: 8 mapped, 3 declared intentional gaps
+1/8 Test #1: sk-compression-conformance .......
+   Passed    0.00 sec
+    Start 2: sk-physics-scene
+2: Test command: /home/apex/.apex-runner/workdirs/027924ca-d8ea-4621-a7fc-933ded826a9f/tasks/12cf6799-2588-4618-9e2c-6555784b2422/skore-test-suite/build/bin/sk-physics-scene
+2: Working Directory: /home/apex/.apex-runner/workdirs/027924ca-d8ea-4621-a7fc-933ded826a9f/tasks/12cf6799-2588-4618-9e2c-6555784b2422/skore-test-suite/build/bin
+2: Test timeout computed to be: 1500
+2: ============================================================
+2:  sk-physics-scene — jolt integration end to end (APX-310)
+2: ============================================================
+2: world: fixed timestep 0.016667 s (default), substeps 1, gravity (0.00, -9.81, 0.00)
+2: scene: ground plane 100x1x100 m, terrain step (top 0.25 m), 3 stairs (tops 0.35/0.70/1.05 m), box tower + spheres (r=0.50 m),
+2:        kinematic platform y(t) = 1.0 + 0.6*sin(2*pi*t/6), rider box on top, character walking +X at 2.5 m/s
+2: simulation: 900 frames @ 60 Hz = 15.0 s at the default timestep, run twice in one process
+2: 
+2: [stack: 3 boxes + 3 spheres fall and settle]
+2:   settled by frame 71 (all stack bodies asleep, |v| < 0.05 m/s)
+2:   top box y: t=5s 2.4881  t=10s 2.4881  t=15s 2.4881 m
+2:   residual drift t=10s -> t=15s: 0.000000 m (stable resting / no jitter)
+2:   residual velocity at t=15s: 0.000000 m/s
+2:   min stack bottom during run: -0.0247 m (floor top y=0; no tunneling)
+2: 
+2: [kinematic platform + rider]
+2:   min rider clearance (platform_top - rider_bottom): -0.0473 m (negative would be penetration)
+2:   final platform y 1.0105 / rider y 1.6605 m (rider resting on top)
+2: 
+2: [character: walks +X at 2.5 m/s over terrain + stairs]
+2:   grounded at t=1.5s: yes   grounded at t=15s: yes
+2:   max height reached: 1.052 m (stair tops up to 1.05 m)
+2:   final x 38.37 m, final y 0.000 m (walked past the stairs on flat ground)
+2: 
+2: [repeat runs: identical scene simulated twice in one process]
+2:   max |final pose delta| (run B vs run A): 0.000000 m
+2: 
+2: RESULT: PASS
+2/8 Test #2: sk-physics-scene .................
+   Passed    0.40 sec
+    Start 3: sk-msdf-atlas-smoke
+3: Test command: /home/apex/.apex-runner/workdirs/027924ca-d8ea-4621-a7fc-933ded826a9f/tasks/12cf6799-2588-4618-9e2c-6555784b2422/skore-test-suite/build/bin/sk-msdf-atlas-smoke
+3: Working Directory: /home/apex/.apex-runner/workdirs/027924ca-d8ea-4621-a7fc-933ded826a9f/tasks/12cf6799-2588-4618-9e2c-6555784b2422/skore-test-suite/build/bin
+3: Test timeout computed to be: 1500
+3: msdf-atlas-gen smoke: OK — 117 glyphs, atlas 64x64, 91.67% pixels non-zero, layout 117 entries
+3: artifacts: /home/apex/.apex-runner/workdirs/027924ca-d8ea-4621-a7fc-933ded826a9f/tasks/12cf6799-2588-4618-9e2c-6555784b2422/skore-test-suite/build/bin/msdf_atlas_smoke.raw
+3: /home/apex/.apex-runner/workdirs/027924ca-d8ea-4621-a7fc-933ded826a9f/tasks/12cf6799-2588-4618-9e2c-6555784b2422/skore-test-suite/build/bin/msdf_atlas_smoke_layout.txt
+3/8 Test #3: sk-msdf-atlas-smoke ..............
+   Passed    0.07 sec
+    Start 4: msdf-atlas-c-smoke
+4: Test command: /home/apex/.apex-runner/workdirs/027924ca-d8ea-4621-a7fc-933ded826a9f/tasks/12cf6799-2588-4618-9e2c-6555784b2422/skore-test-suite/build/bin/msdf-atlas-c-smoke
+4: Working Directory: /home/apex/.apex-runner/workdirs/027924ca-d8ea-4621-a7fc-933ded826a9f/tasks/12cf6799-2588-4618-9e2c-6555784b2422/skore-test-suite/build/skore/thirdparty/msdf-atlas-gen
+4: Test timeout computed to be: 1500
+4: msdf-atlas-c smoke: all checks passed
+4/8 Test #4: msdf-atlas-c-smoke ...............
+   Passed    0.30 sec
+    Start 5: sk-no-statics-guard
+5: Test command: /home/apex/apex/apex/.apex/venv/bin/python3.12 "/home/apex/.apex-runner/workdirs/027924ca-d8ea-4621-a7fc-933ded826a9f/tasks/12cf6799-2588-4618-9e2c-6555784b2422/skore/tests/../scripts/check-no-statics.py"
+5: Working Directory: /home/apex/.apex-runner/workdirs/027924ca-d8ea-4621-a7fc-933ded826a9f/tasks/12cf6799-2588-4618-9e2c-6555784b2422/skore-test-suite/build/skore/tests
+5: Test timeout computed to be: 1500
+5: check-no-statics: OK (121 file-scope statics allowlisted, 0 accessor hits)
+5/8 Test #5: sk-no-statics-guard ..............
+   Passed    0.79 sec
+    Start 6: sk-tests
+6: ======== host (core + app) ========
+6: SKIP: integration tests (SK_RUN_INTEGRATION=0)
+6: 392 Tests 0 Failures 0 Ignored 
+6: host: ran=392 failed=0
+6: ======== plugin: sk-render-device.so ========
+6: 8 Tests 0 Failures 0 Ignored 
+6: plugin sk-render-device.so: ran=8 failed=0
+6: ======== plugin: sk-vulkan-render-device.so ========
+6: 13 Tests 0 Failures 0 Ignored 
+6: plugin sk-vulkan-render-device.so: ran=13 failed=0
+6: ======== plugin: sk-test-render-device.so ========
+6: 11 Tests 0 Failures 0 Ignored 
+6: plugin sk-test-render-device.so: ran=11 failed=0
+6: 43 Tests 0 Failures 0 Ignored 
+6: ======== plugin: sk-ui.so ========
+6: /home/apex/.apex-runner/workdirs/027924ca-d8ea-4621-a7fc-933ded826a9f/tasks/12cf6799-2588-4618-9e2c-6555784b2422/skore/foundation/test.c:5:ui_auto_harness_deterministic_clock:PASS
+6: [2026-08-14 02:28:02] [ERROR] [ui-image-structure] cpu_image_assert_solid: FAIL — region=[2,2]..[5,5] expected=rgba(40,80,120,255)±0 nonmatching=1/16 (6.25%) max_channel_delta=1 bad_bbox=[3,3]..[3,3]
+6: [2026-08-14 02:28:02] [ERROR] [ui-image-structure] cpu_image_assert_coverage: FAIL — region=[0,0]..[7,7] color=rgba(255,0,0,255)±0 expected_fraction=[0.570,0.600] measured=0.5625 (36/64 pixels)
+6: [2026-08-14 02:28:02] [ERROR] [ui-image-structure] cpu_image_assert_coverage: FAIL — region=[0,0]..[7,7] color=rgba(255,0,0,255)±0 expected_fraction=[0.300,0.500] measured=0.5625 (36/64 pixels)
+6: [2026-08-14 02:28:02] [ERROR] [ui-image-structure] cpu_image_assert_bbox: FAIL — region=[0,0]..[15,15] color=rgba(0,0,255,255)±0 expected=[5,3]..[12,9] pos_tol=0 size_tol=0 min_pixels=56 expect_empty=0 actual=[4,3]..[11,9] pixels=56 found=1 pos_delta=(1,0) size_delta=(0,0) empty_mismatch=0 missing=0 min_pixels_fail=0
+6: [2026-08-14 02:28:02] [ERROR] [ui-image-structure] cpu_image_assert_bbox: FAIL — region=[0,0]..[15,15] color=rgba(0,0,255,255)±0 expected=[4,3]..[10,9] pos_tol=0 size_tol=0 min_pixels=1 expect_empty=0 actual=[4,3]..[11,9] pixels=56 found=1 pos_delta=(0,0) size_delta=(1,0) empty_mismatch=0 missing=0 min_pixels_fail=0
+6: [2026-08-14 02:28:02] [ERROR] [ui-image-structure] cpu_image_assert_bbox: FAIL — region=[0,0]..[15,15] color=rgba(0,0,255,255)±0 expected=[4,3]..[11,9] pos_tol=0 size_tol=0 min_pixels=100 expect_empty=0 actual=[4,3]..[11,9] pixels=56 found=1 pos_delta=(0,0) size_delta=(0,0) empty_mismatch=0 missing=0 min_pixels_fail=1
+6: [2026-08-14 02:28:02] [ERROR] [ui-image-structure] cpu_image_assert_bbox: FAIL — region=[0,0]..[15,15] color=rgba(0,0,255,255)±0 expected=[0,0]..[0,0] pos_tol=0 size_tol=0 min_pixels=0 expect_empty=1 actual=[4,3]..[11,9] pixels=56 found=1 pos_delta=(0,0) size_delta=(0,0) empty_mismatch=1 missing=0 min_pixels_fail=0
+6: [2026-08-14 02:28:02] [ERROR] [ui-image-structure] cpu_image_assert_histogram: FAIL — expected=3 colors: [0]=rgba(255,0,0,255) range=[0.450,0.550] measured=0.5000 (32); [1]=rgba(0,255,0,255) range=[0.200,0.240] measured=0.2500 (16) OUT_OF_RANGE; [2]=rgba(0,0,255,255) range=[0.200,0.300] measured=0.2500 (16); missing=0 out_of_range=1 unexpected=0 (0.00%) dominant: [0]=rgba(255,0,0,255) 50.00% (32); [1]=rgba(0,0,255,255) 25.00% (16); [2]=rgba(0,255,0,255) 25.00% (16);
+6: [2026-08-14 02:28:02] [ERROR] [ui-image-structure] cpu_image_assert_histogram: FAIL — expected=2 colors: [0]=rgba(255,0,0,255) range=[0.450,0.550] measured=0.5000 (32); [1]=rgba(255,255,0,255) range=[0.100,0.400] measured=0.0000 (0) MISSING; missing=1 out_of_range=0 unexpected=2 (50.00%) dominant: [0]=rgba(255,0,0,255) 50.00% (32); [1]=rgba(0,0,255,255) 25.00% (16); [2]=rgba(0,255,0,255) 25.00% (16);
+6: [2026-08-14 02:28:02] [ERROR] [ui-image-structure] cpu_image_assert_histogram: FAIL — expected=1 colors: [0]=rgba(255,0,0,255) range=[0.450,0.550] measured=0.5000 (32); missing=0 out_of_range=0 unexpected=2 (50.00%) dominant: [0]=rgba(255,0,0,255) 50.00% (32); [1]=rgba(0,0,255,255) 25.00% (16); [2]=rgba(0,255,0,255) 25.00% (16);
+6: [2026-08-14 02:28:02] [ERROR] [ui-image-structure] cpu_image_assert_region_hash: FAIL — expected=0xcbe97383f9e5bfd0 actual=0xcbe97383f9e5bfd1
+6: 168 Tests 0 Failures 0 Ignored 
+6: plugin sk-ui.so: ran=168 failed=0
+6: ======== plugin: sk-jolt.so ========
+6: /home/apex/.apex-runner/workdirs/027924ca-d8ea-4621-a7fc-933ded826a9f/tasks/12cf6799-2588-4618-9e2c-6555784b2422/skore/foundation/test.c:9:jolt_step_deterministic_across_runs:PASS
+6: 43 Tests 0 Failures 0 Ignored 
+6: plugin sk-jolt.so: ran=43 failed=0
+6: ======== plugin: libdxcompiler.so ========
+6: ======== plugin: libdxil.so ========
+6: ======== plugin: sk-entities.so ========
+6: 92 Tests 0 Failures 0 Ignored 
+6: plugin sk-entities.so: ran=92 failed=0
+6: ======== plugin: sk-platform-window.so ========
+6: 13 Tests 0 Failures 0 Ignored 
+6: plugin sk-platform-window.so: ran=13 failed=0
+6: ======== plugin: sk-render-graph.so ========
+6: 60 Tests 0 Failures 0 Ignored 
+6: plugin sk-render-graph.so: ran=60 failed=0
+6: ======== plugin: sk-dxc-compiler.so ========
+6: 9 Tests 0 Failures 0 Ignored 
+6: plugin sk-dxc-compiler.so: ran=9 failed=0
+6: ======== TOTAL: ran=852 failed=0 ========
+6/8 Test #6: sk-tests .........................
+   Passed   11.30 sec
+    Start 7: sk-integration-tests
+7: /home/apex/.apex-runner/workdirs/027924ca-d8ea-4621-a7fc-933ded826a9f/tasks/12cf6799-2588-4618-9e2c-6555784b2422/skore/foundation/test.c:8:ui_capture_harness_deterministic:PASS
+7: /home/apex/.apex-runner/workdirs/027924ca-d8ea-4621-a7fc-933ded826a9f/tasks/12cf6799-2588-4618-9e2c-6555784b2422/skore/foundation/test.c:40:ui_text_screenshot_determinism:PASS
+7: ui_text_screenshot[msdf]: captured 'pangram'
+7: ui_text_screenshot[msdf]: captured 'sizes'
+7: ui_text_screenshot[msdf]: captured 'colors_alpha'
+7: ui_text_screenshot[msdf]: captured 'scaled'
+7: ui_text_screenshot[msdf]: captured 'glyph_grid'
+7: ui_text_screenshot[msdf]: complete set written under {artifact-root}/text-screenshot/msdf/
+7: /home/apex/.apex-runner/workdirs/027924ca-d8ea-4621-a7fc-933ded826a9f/tasks/12cf6799-2588-4618-9e2c-6555784b2422/skore/foundation/test.c:41:ui_text_screenshot_suite_completeness:PASS
+7: 60 Tests 0 Failures 0 Ignored 
+7/8 Test #7: sk-integration-tests .............
+   Passed    3.29 sec
+    Start 8: sk-text-screenshot
+8: Test command: /home/apex/.local/bin/cmake "-E" "env" "SK_TEST_ARTIFACT_DIR=/home/apex/.apex-runner/workdirs/027924ca-d8ea-4621-a7fc-933ded826a9f/tasks/12cf6799-2588-4618-9e2c-6555784b2422/skore-test-suite/build/test-artifacts" "/home/apex/.apex-runner/workdirs/027924ca-d8ea-4621-a7fc-933ded826a9f/tasks/12cf6799-2588-4618-9e2c-6555784b2422/skore-test-suite/build/bin/sk-text-screenshot" "--verify"
+8: sk-text-screenshot: output root = /home/apex/.apex-runner/workdirs/027924ca-d8ea-4621-a7fc-933ded826a9f/tasks/12cf6799-2588-4618-9e2c-6555784b2422/skore-test-suite/build/test-artifacts (mode=msdf verify=1)
+8: ui_text_screenshot[msdf]: sample 'pangram' deterministic (28897 bytes png)
+8: ui_text_screenshot[msdf]: sample 'sizes' deterministic (49242 bytes png)
+8: ui_text_screenshot[msdf]: sample 'colors_alpha' deterministic (35136 bytes png)
+8: ui_text_screenshot[msdf]: sample 'scaled' deterministic (32471 bytes png)
+8: ui_text_screenshot[msdf]: sample 'glyph_grid' deterministic (29368 bytes png)
+8: ui_text_screenshot[msdf]: complete set written under {artifact-root}/text-screenshot/msdf/
+8: sk-text-screenshot: complete capture set written under /home/apex/.apex-runner/workdirs/027924ca-d8ea-4621-a7fc-933ded826a9f/tasks/12cf6799-2588-4618-9e2c-6555784b2422/skore-test-suite/build/test-artifacts/text-screenshot/msdf/
+8/8 Test #8: sk-text-screenshot ...............
+   Passed    1.94 sec
+100% tests passed, 0 tests failed out of 8
+Label Time Summary:
+Total Test time (real) =  18.09 sec

@@ -1,0 +1,62 @@
+{
+  "task": "APX-326",
+  "title": "Run full skore test suite and record results",
+  "verdict": "green",
+  "follow_up": "APX-327 can close as a no-op. No product bugs and no harness/assertion issues.",
+  "failing_test_names": [],
+  "failures": [],
+  "started_at_utc": "2026-08-14T00:27:49Z",
+  "elapsed_seconds": 18.09,
+  "engine": {
+    "ref": "v2",
+    "sha": "5c7a3da1b84ffb5fd862f108e21353078c227e7a"
+  },
+  "platform": {
+    "os": "Linux",
+    "arch": "x86_64",
+    "kernel": "6.8.0-137-generic",
+    "compiler": "GCC 13.3.0",
+    "cmake": "3.30.5",
+    "ninja": "1.11.1",
+    "build_type": "Debug",
+    "clang_tidy": false,
+    "vulkan_icd": "/usr/share/vulkan/icd.d/lvp_icd.json",
+    "note": "Only platform/config this repo already uses (CI: Linux + lavapipe Debug). Windows, macOS, and Release are not configured here."
+  },
+  "ctest": {
+    "total": 8,
+    "passed": 8,
+    "failed": 0,
+    "skipped": 0,
+    "tests": [
+      {"name": "sk-compression-conformance", "label": "unit", "status": "pass", "seconds": 0.00248805, "notes": "8 mapped, 3 declared intentional gaps"},
+      {"name": "sk-physics-scene", "label": "physics", "status": "pass", "seconds": 0.399021, "notes": "RESULT: PASS"},
+      {"name": "sk-msdf-atlas-smoke", "label": "unit", "status": "pass", "seconds": 0.0702813, "notes": "117 glyphs, 64x64 atlas"},
+      {"name": "msdf-atlas-c-smoke", "label": "", "status": "pass", "seconds": 0.295149, "notes": "all checks passed"},
+      {"name": "sk-no-statics-guard", "label": "unit", "status": "pass", "seconds": 0.785675, "notes": "121 allowlisted statics, 0 accessor hits"},
+      {"name": "sk-tests", "label": "unit", "status": "pass", "seconds": 11.2971, "ran": 852, "failed": 0, "ignored": 0},
+      {"name": "sk-integration-tests", "label": "integration", "status": "pass", "seconds": 3.28928, "ran": 60, "failed": 0, "ignored": 0},
+      {"name": "sk-text-screenshot", "label": "integration;ui;ui-text-screenshot", "status": "pass", "seconds": 1.93954, "notes": "5 MSDF samples deterministic"}
+    ]
+  },
+  "sk_tests_breakdown": [
+    {"registry": "host", "ran": 392, "failed": 0, "ignored": 0},
+    {"registry": "sk-render-device.so", "ran": 8, "failed": 0, "ignored": 0},
+    {"registry": "sk-vulkan-render-device.so", "ran": 13, "failed": 0, "ignored": 0},
+    {"registry": "sk-test-render-device.so", "ran": 11, "failed": 0, "ignored": 0},
+    {"registry": "sk-profiler.so", "ran": 43, "failed": 0, "ignored": 0},
+    {"registry": "sk-ui.so", "ran": 168, "failed": 0, "ignored": 0},
+    {"registry": "sk-jolt.so", "ran": 43, "failed": 0, "ignored": 0},
+    {"registry": "sk-entities.so", "ran": 92, "failed": 0, "ignored": 0},
+    {"registry": "sk-platform-window.so", "ran": 13, "failed": 0, "ignored": 0},
+    {"registry": "sk-render-graph.so", "ran": 60, "failed": 0, "ignored": 0},
+    {"registry": "sk-dxc-compiler.so", "ran": 9, "failed": 0, "ignored": 0}
+  ],
+  "notes": [
+    "sk-tests prints SKIP: integration tests (SK_RUN_INTEGRATION=0). Those cases ran in sk-integration-tests (60/60).",
+    "sk-ui logs [ERROR] [ui-image-structure] FAIL while exercising assertion helpers with intentionally wrong expected values. Unity still reports 0 failures.",
+    "sk-physics-scene printed a mimalloc aligned-allocation fallback warning; scene still RESULT: PASS.",
+    "clay_adapter WARN about Clay absolute-position mapping during text-screenshot; verify still passed.",
+    "sk-isolate-tests and sk-repro-cycles are built but not registered with CTest."
+  ]
+}

@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="Linux-c++"
+	tests="8"
+	failures="0"
+	disabled="0"
+	skipped="0"
+	hostname="vmi3454874"
+	time="18"
+	timestamp="2026-08-14T02:27:49"
+	>
+	<testcase name="sk-compression-conformance" classname="sk-compression-conformance" time="0.00248805" status="run">
+		<properties>
+			<property name="cmake_labels" value="unit"/>
+		</properties>
+		<system-out>
+Intentional gaps in the APX-165 migration table (no planned v2 equivalent):
+  - Reflection value registration of CompressionMode (RegisterIOTypes.cpp:251-253)
+    reason: No planned equivalent: v2 has no reflection/metadata layer; re-add with the reflection layer.
+  - Texture resource field registration of CompressionMode (RegisterGraphicsTypes.cpp:1104)
+    reason: No planned equivalent: v2 resource layer stores the raw id (u32); no metadata field yet.
+  - Commented-out LZ4 branches in Compression.cpp
+    reason: No planned equivalent: never shipped on main, no LZ4 dependency.
+
+compression mapping conformance check PASSED: 8 mapped, 3 declared intentional gaps
+</system-out>
+	</testcase>
+	<testcase name="sk-physics-scene" classname="sk-physics-scene" time="0.399021" status="run">
+		<properties>
+			<property name="cmake_labels" value="physics"/>
+		</properties>
+		<system-out>[2026-08-14 02:27:49] [INFO] [app] app startup complete
+[2026-08-14 02:27:49] [INFO] [app] bootstrap init
+[2026-08-14 02:27:49] [INFO] [app] scanning plugins directory: /home/apex/.apex-runner/workdirs/027924ca-d8ea-4621-a7fc-933ded826a9f/tasks/12cf6799-2588-4618-9e2c-6555784b2422/skore-test-suite/build/bin/plugins
+[2026-08-14 02:27:49] [INFO] [app] loading plugin: /home/apex/.apex-runner/workdirs/027924ca-d8ea-4621-a7fc-933ded826a9f/tasks/12cf6799-2588-4618-9e2c-6555784b2422/skore-test-suite/build/bin/plugins/sk-dxc-compiler.so
+[2026-08-14 02:27:49] [INFO] [app] plugin loaded: /home/apex/.apex-runner/workdirs/027924ca-d8ea-4621-a7fc-933ded826a9f/tasks/12cf6799-2588-4618-9e2c-6555784b2422/skore-test-suite/build/bin/plugins/sk-dxc-compiler.so
+[2026-08-14 02:27:49] [INFO] [app] loading plugin: /home/apex/.apex-runner/workdirs/027924ca-d8ea-4621-a7fc-933ded826a9f/tasks/12cf6799-2588-4618-9e2c-6555784b2422/skore-test-suite/build/bin/plugins/sk-entities.so
+[2026-08-14 02:27:49] [INFO] [app] plugin loaded: /home/ap...
+[This part of the test output was removed since it exceeds the threshold of 1024 bytes.]
+</system-out>
+	</testcase>
+	<testcase name="sk-msdf-atlas-smoke" classname="sk-msdf-atlas-smoke" time="0.0702813" status="run">
+		<properties>
+			<property name="cmake_labels" value="unit"/>
+		</properties>
+		<system-out>msdf-atlas-gen smoke: OK — 117 glyphs, atlas 64x64, 91.67% pixels non-zero, layout 117 entries
+artifacts: /home/apex/.apex-runner/workdirs/027924ca-d8ea-4621-a7fc-933ded826a9f/tasks/12cf6799-2588-4618-9e2c-6555784b2422/skore-test-suite/build/bin/msdf_atlas_smoke.raw
+/home/apex/.apex-runner/workdirs/027924ca-d8ea-4621-a7fc-933ded826a9f/tasks/12cf6799-2588-4618-9e2c-6555784b2422/skore-test-suite/build/bin/msdf_atlas_smoke_layout.txt
+</system-out>
+	</testcase>
+	<testcase name="msdf-atlas-c-smoke" classname="msdf-atlas-c-smoke" time="0.295149" status="run">
+		<properties/>
+		<system-out>msdf-atlas-c smoke: all checks passed
+</system-out>
+	</testcase>
+	<testcase name="sk-no-statics-guard" classname="sk-no-statics-guard" time="0.785675" status="run">
+		<properties>
+			<property name="cmake_labels" value="unit"/>
+		</properties>
+		<system-out>check-no-statics: OK (121 file-scope statics allowlisted, 0 accessor hits)
+</system-out>
+	</testcase>
+	<testcase name="sk-tests" classname="sk-tests" time="11.2971" status="run">
+		<properties>
+			<property name="cmake_labels" value="unit"/>
+		</properties>
+		<system-out>
+======== host (core + app) ========
+/home/apex/.apex-runner/workdirs/027924ca-d8ea-4621-a7fc-933ded826a9f/tasks/12cf6799-2588-4618-9e2c-6555784b2422/skore/foundation/test.c:0:allocator_default_table_is_complete:PASS
+/home/apex/.apex-runner/workdirs/027924ca-d8ea-4621-a7fc-933ded826a9f/tasks/12cf6799-2588-4618-9e2c-6555784b2422/skore/foundation/test.c:1:allocator_get_default_matches_static_table:PASS
+/home/apex/.apex-runner/workdirs/027924ca-d8ea-4621-a7fc-933ded826a9f/tasks/12cf6799-2588-4618-9e2c-6555784b2422/skore/foundation/test.c:2:allocator_alloc_free_roundtrip:PASS
+/home/apex/.apex-runner/workdirs/027924ca-d8ea-4621-a7fc-933ded826a9f/tasks/12cf6799-2588-4618-9e2c-6555784b2422/skore/foundation/test.c:3:allocator_realloc_grows_and_preserves:PASS
+/home/apex/.apex-runner/workdirs/027924ca-d8ea-4621-a7fc-933ded826a9f/tasks/12cf6799-2588-4618-9e2c-6555784b2422/skore/foundation/test.c:4:allocator_realloc_null_acts_like_alloc:PASS
+/home/apex/.apex-runner/workdirs/027924ca-d8ea-4621-a7fc-933ded826a9f/tasks/12cf...
+[This part of the test output was removed since it exceeds the threshold of 1024 bytes.]
+</system-out>
+	</testcase>
+	<testcase name="sk-integration-tests" classname="sk-integration-tests" time="3.28928" status="run">
+		<properties>
+			<property name="cmake_labels" value="integration"/>
+		</properties>
+		<system-out>[2026-08-14 02:28:02] [INFO] [app] app startup complete
+[2026-08-14 02:28:02] [INFO] [app] bootstrap init
+[2026-08-14 02:28:02] [INFO] [app] scanning plugins directory: /home/apex/.apex-runner/workdirs/027924ca-d8ea-4621-a7fc-933ded826a9f/tasks/12cf6799-2588-4618-9e2c-6555784b2422/skore-test-suite/build/bin/plugins
+[2026-08-14 02:28:02] [INFO] [app] loading plugin: /home/apex/.apex-runner/workdirs/027924ca-d8ea-4621-a7fc-933ded826a9f/tasks/12cf6799-2588-4618-9e2c-6555784b2422/skore-test-suite/build/bin/plugins/sk-dxc-compiler.so
+[2026-08-14 02:28:02] [INFO] [app] plugin loaded: /home/apex/.apex-runner/workdirs/027924ca-d8ea-4621-a7fc-933ded826a9f/tasks/12cf6799-2588-4618-9e2c-6555784b2422/skore-test-suite/build/bin/plugins/sk-dxc-compiler.so
+[2026-08-14 02:28:02] [INFO] [app] loading plugin: /home/apex/.apex-runner/workdirs/027924ca-d8ea-4621-a7fc-933ded826a9f/tasks/12cf6799-2588-4618-9e2c-6555784b2422/skore-test-suite/build/bin/plugins/sk-entities.so
+[2026-08-14 02:28:02] [INFO] [app] plugin loaded: /home/ap...
+[This part of the test output was removed since it exceeds the threshold of 1024 bytes.]
+</system-out>
+	</testcase>
+	<testcase name="sk-text-screenshot" classname="sk-text-screenshot" time="1.93954" status="run">
+		<properties>
+			<property name="cmake_labels" value="integration;ui;ui-text-screenshot"/>
+		</properties>
+		<system-out>sk-text-screenshot: output root = /home/apex/.apex-runner/workdirs/027924ca-d8ea-4621-a7fc-933ded826a9f/tasks/12cf6799-2588-4618-9e2c-6555784b2422/skore-test-suite/build/test-artifacts (mode=msdf verify=1)
+[2026-08-14 02:28:05] [INFO] [app] app startup complete
+[2026-08-14 02:28:05] [INFO] [app] bootstrap init
+[2026-08-14 02:28:05] [INFO] [app] scanning plugins directory: /home/apex/.apex-runner/workdirs/027924ca-d8ea-4621-a7fc-933ded826a9f/tasks/12cf6799-2588-4618-9e2c-6555784b2422/skore-test-suite/build/bin/plugins
+[2026-08-14 02:28:05] [INFO] [app] loading plugin: /home/apex/.apex-runner/workdirs/027924ca-d8ea-4621-a7fc-933ded826a9f/tasks/12cf6799-2588-4618-9e2c-6555784b2422/skore-test-suite/build/bin/plugins/sk-dxc-compiler.so
+[2026-08-14 02:28:05] [INFO] [app] plugin loaded: /home/apex/.apex-runner/workdirs/027924ca-d8ea-4621-a7fc-933ded826a9f/tasks/12cf6799-2588-4618-9e2c-6555784b2422/skore-test-suite/build/bin/plugins/sk-dxc-compiler.so
+[2026-08-14 02:28:05] [INFO] [app] loading plugin: /home/apex/.ape...
+[This part of the test output was removed since it exceeds the threshold of 1024 bytes.]
+</system-out>
+	</testcase>
+</testsuite>
